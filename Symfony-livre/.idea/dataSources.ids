@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - symfony-livre@localhost" uuid="5b71b2a7-bfb0-449a-8c0a-a9a216155284">
+    <database-info product="MySQL" version="5.5.42" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="symfony-livre"/>
+    <table name="article" schema="" catalog="symfony-livre" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="publication" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="titre" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="auteur" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="contenu" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="image_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_23A0E663DA5256D" columns="image_id" ref-table="image" ref-schema="" ref-catalog="symfony-livre" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_67F068BC7294869C" table="commentaire" schema="" catalog="symfony-livre" columns="article_id"/>
+      <index name="UNIQ_23A0E663DA5256D" unique="true" columns="image_id"/>
+    </table>
+    <table name="commentaire" schema="" catalog="symfony-livre" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="article_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="auteur" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="contenu" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_67F068BC7294869C" columns="article_id" ref-table="article" ref-schema="" ref-catalog="symfony-livre" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="IDX_67F068BC7294869C" unique="false" columns="article_id"/>
+    </table>
+    <table name="image" schema="" catalog="symfony-livre" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="url" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="alt" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_23A0E663DA5256D" table="article" schema="" catalog="symfony-livre" columns="image_id"/>
+    </table>
+  </data-source>
+</component>

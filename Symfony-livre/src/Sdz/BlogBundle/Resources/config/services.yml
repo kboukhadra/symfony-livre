@@ -1,0 +1,14 @@
+services:
+   sdz_blog.antispam:
+       class: Sdz\BlogBundle\Antispam\SdzAntispam
+       arguments: [@mailer, %locale% , 3]
+
+services:
+   sdzblog_validator.antiflood: #le nom du service
+       class: Sdz\BlogBundle\Validator\AntifloodValidator #la class de service, il est créé avec 2 arguments on va  les injecter
+       arguments: [@request,@doctrine.orm.entity_manager]  #les données que l'on injecte au service: le requete et em
+       scope: request #Comme on injecte la requete on doit préciser son scope
+       tags:
+           - { name : validator.constraint_validator, alias: sdzblog_antiflood }  #c est avec cette alias qu'on retrouve le service
+
+

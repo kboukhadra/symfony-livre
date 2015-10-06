@@ -1,0 +1,12 @@
+kh_test_homepage:
+    path:     /
+    defaults: { _controller: KhTestBundle:Default:index }
+
+kh_test_new:
+    path:     /new
+    defaults: { _controller: KhTestBundle:Default:new }
+
+kh_test_task_sucess:
+    path:    /sucess
+    defaults: { _controller: KhTestBundle:Default:sucess }
+

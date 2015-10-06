@@ -1,0 +1,59 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions : true
+
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User : plaintext
+        Sdz\UserBundle\Entity\User: sha512
+       # FOS\UserBundle\Model\UserInterface : sha512 on demande à lencoder de se servir de cette classe pour encode
+       #les mot de pass et cette classe herite de FOS\UserBundle\Model\UserInterface
+
+
+    role_hierarchy:
+        ROLE_ADMIN:        [ROLE_AUTEUR,ROLE_MODERATEUR ]
+        ROLE_SUPER_ADMIN : [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        main:
+        #le fournisseur doit savoir quelle repository doctrine il doit récuperer pour ensuite charger nos entité
+        #l'attribut de le classe qui sert d'indentifiant securité on l'utilise et on le lui dit
+            id: fos_user.user_provider.username
+
+
+
+    #on va dire au parfeu d'utliser le nouveau fornisseur en mettant provider : main
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|image|js)/
+            security: false
+
+
+        main:
+            pattern: ^/ #cela signifie que toutes les url commençant par / notre site entier sont protége
+                               #sont derriere le par-feu main donc mon site est protégé
+
+            anonymous: true #n'accepte pas les utlisateur anonyme que les authentifié
+            provider : main
+            form_login: #methode d'authentification utilisé par le parfeu
+                login_path:  fos_user_security_login # login_check corresponds à la route de validation du formulaire
+                check_path:  fos_user_security_check  #elle vérifira les indentifiant renseignés
+                default_target_path : /blog # redirection après cun connexion réussi
+
+
+
+            logout : # logout rend possible la déconnexion
+                path: fos_user_security_logout # la route pour se déconnecter
+                target: /blog # /blog est url vers laquelle sera redirigé apres la déconnexion
+
+            remember_me:
+                key: %secret% #%secret est un parametre de parametre.yml
+
+
+
+
+
+
+
+    access_control:
+        - { path: ^/blog/ajouter$, roles: ROLE_AUTEUR }

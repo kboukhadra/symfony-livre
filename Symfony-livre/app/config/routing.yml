@@ -1,0 +1,11 @@
+kh_test:
+    resource: "@KhTestBundle/Resources/config/routing.yml"
+    prefix:   /
+
+sdz_blog:
+    resource: "@SdzBlogBundle/Resources/config/routing.yml"
+    prefix:   /blog
+
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

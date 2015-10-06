@@ -1,0 +1,21 @@
+{% extends 'SdzBlogBundle::layout.html.twig' %}
+
+{% block title %}
+    les role - {{ parent() }}
+{% endblock %}
+
+{% block sdzblog_body %}
+
+    {% for user in tabUsers %}
+     <ul>
+        {% for  role in user.roles %}
+        <li>{{ role }}</li>
+    {% endfor %}
+    </ul>
+
+
+
+    {% endfor %}
+
+
+{% endblock %}

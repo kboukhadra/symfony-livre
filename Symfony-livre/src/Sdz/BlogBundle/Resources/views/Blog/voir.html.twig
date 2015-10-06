@@ -1,0 +1,51 @@
+{% extends 'SdzBlogBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+      #form{
+          position: relative;
+          left: 347px;
+          bottom: 40px;
+
+      }
+    </style>
+  {% endblock %}
+
+{% block title %}
+    Lecture d'un article - {{ parent() }}
+{% endblock %}
+
+
+{% block sdzblog_body %}
+    {%  for message in app.session.flashbag.get('info') %}
+        {{ message }}
+    {% endfor %}
+
+{% include "SdzBlogBundle:Blog:article.html.twig" with {'accueil':false} %}
+
+
+<p>
+
+    <a href="{{ path('sdzblog_accueil') }}" class="btn">
+        <i class="icon-chevron-left"></i>
+        Retour à la liste d'article
+    </a>
+
+    <a href="{{ path('sdzblog_modifier',{'slug' : article.slug}) }}" class="btn">
+        <i class="icon-edit"></i>
+        Modifier l'article
+    </a>
+
+    <a href="{{ path('sdzblog_supprimer',{'slug' : article.slug}) }}" class="btn btn-danger">
+        <i class="icon-trash"></i>
+        Supprimer l'article
+    </a>
+
+</p>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends '::layout.html.twig' %}
+
+   {% block title  %}Blog--{{ parent() }} {% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Blog</h1>
+    {% block sdzblog_body %}
+
+    {% endblock %}
+
+{% endblock %}
+
